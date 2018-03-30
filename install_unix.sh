@@ -25,16 +25,26 @@
 
 echo 'Installing SmartCashVoting...'
 
-if ( python ); then
+if hash python 2>/dev/null ; then
     echo 'Python found! Download python-smartcash lib now...'
 
-    $url = 'https://github.com/xdustinface/python-smartcash/archive/v0.0.1.tar.gz'
-    $archive = 'python-smartcash.tar.gz'
+    url='https://github.com/xdustinface/python-smartcash/archive/v0.0.1.tar.gz'
+    archive='python-smartcash.tar.gz'
 
-    wget $url -o $archive 2>/dev/null || curl -sL $url -o $archive
+    wget $url -O $archive 2>/dev/null || curl -sL $url -o $archive
 
     tar -xf $archive
     rm $archive
+
+    echo "Enter the rpc user from your smartcash.conf.."
+
+    read -p "rpcuser: " rpcuser </dev/tty
+
+    echo "Enter the rpc password from your smartcash.conf.."
+    read -p "rpcpassword: " rpcpassword </dev/tty
+
+    sed -i "s/rpcuser=.*/rpcuser=\"${rpcuser}\"/g" wallet.py
+    sed -i "s/rpcpassword=.*/rpcpassword=\"${rpcpassword}\"/g" wallet.py
 
     cd python-smartcash-0.0.1/
 

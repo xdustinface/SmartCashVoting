@@ -73,7 +73,7 @@ $AllProtocols = [System.Net.SecurityProtocolType]'Tls11,Tls12'
 If you got no error just run
 
 ```
-powershell ./install_voting.ps1
+powershell .\install_voting.ps1
 ```
 
 And follow the instructions.
@@ -91,6 +91,7 @@ git checkout tags/v0.0.1
 or just download the archive
 
 https://github.com/xdustinface/python-smartcash/archive/v0.0.1.zip
+
 https://github.com/xdustinface/python-smartcash/archive/v0.0.1.tar.gz
 
 then go into the directory and run `python setup.py install`
@@ -105,6 +106,7 @@ cd SmartCashVoting
 or to download the archived file from here:
 
 https://github.com/xdustinface/SmartCashVoting/archive/master.zip
+
 https://github.com/xdustinface/SmartCashVoting/archive/master.tar.gz
 
 extract and open the file `wallet.py` to change the variables

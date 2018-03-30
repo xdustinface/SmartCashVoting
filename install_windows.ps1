@@ -41,6 +41,7 @@ Function Test-CommandExists
 
 }
 
+$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
 if(Test-CommandExists python)
 {
@@ -49,28 +50,28 @@ if(Test-CommandExists python)
 
     echo "`r`nPython found! Download python-smartcash lib now...`r`n"
 
-    Invoke-WebRequest https://github.com/xdustinface/python-smartcash/archive/v0.0.1.zip -OutFile python-smartcash.zip
+    Invoke-WebRequest https://github.com/xdustinface/python-smartcash/archive/v0.0.1.zip -OutFile $scriptPath\python-smartcash.zip
 
-    if (Test-Path /python-smartcash-0.0.1/ -PathType Container) {
-		Remove-Item -path python-smartcash-0.0.1/ -recurse -force
+    if (Test-Path $scriptPath\python-smartcash-0.0.1/ -PathType Container) {
+		Remove-Item -path $scriptPath\python-smartcash-0.0.1/ -recurse -force
 	}
 
-    Expand-Archive -Path python-smartcash.zip -DestinationPath ./
-    Remove-Item python-smartcash.zip
+    Expand-Archive -Path $scriptPath\python-smartcash.zip -DestinationPath $scriptPath
+    Remove-Item $scriptPath\python-smartcash.zip
 
-    cd python-smartcash-0.0.1/
+    $rpcuser = Read-Host 'Enter the rpc user from your smartcash.conf: '
+    $rpcpassword = Read-Host 'Enter the rpc password from your smartcash.conf: '
+
+    (Get-Content $scriptPath\wallet.py) `
+        -replace 'rpcuser=.*', $('rpcuser="' + $rpcuser + '"') `
+        -replace 'rpcpassword=.*', $('rpcpassword="' + $rpcpassword + '"') |
+      Out-File $scriptPath\wallet.py
+
+    cd $scriptPath\python-smartcash-0.0.1
 
     echo "`r`nInstalling python-smartcash...`r`n"
 
-    python setup.py install;
-
-    cd ../
-
-    Get-Item "\\$_\C$\Program Files\My Application\MyApp.ini" \\} |
-
-    Replace-FileString -Pattern 'Server=appserver1(\r\n)Port=7840'
-
-    -Replacement 'rpcuser=test' -Overwrite
+    python setup.py install
 
     Read-Host -Prompt "`r`nDone! Now you can start the run_windows.ps1 to run the voting script."
 }
