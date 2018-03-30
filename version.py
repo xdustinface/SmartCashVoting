@@ -1,10 +1,6 @@
 #####
 # Part of `SmartCashVoting`
 #
-# Class to maintain a database of the SmartCash blockchain.
-#  * Creates the database
-#  * Keeps the blocks/transactions synced
-#  * Callacks for new blocks
 #
 # Copyright 2018 dustinface
 #

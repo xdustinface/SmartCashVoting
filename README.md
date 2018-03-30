@@ -1,10 +1,11 @@
 # SmartCashVoting
-
 Python script to vote with all your voting power in one shot.
 
-**This no official SmartCash script. PLEASE ONLY use the version you cloned by yourself
+**This no official SmartCash script. PLEASE ONLY use the version you installed by yourself
 from this repo and never any version you got from somewhere/someone else. This script requires
-your wallet to be unlocked which means any modification could empty your wallet!**
+your wallet to be unlocked with an local RPC server enabled which means any malicious modification of this script could empty your wallet!**
+
+**Use it with care and sanity! I cant take over any responsibilities for your funds.**
 
 ## What?
 This is attempt to increase the overall voting power for the SmartCash voting portal.
@@ -18,15 +19,14 @@ you can cast votes with your overall voting power in one shot.
 - Signs all the required voting message for each of your addresses with the RPC interface.
 - Casts all votes consecutively without any action of yourself required.
 
-## Configuration of you wallet
-To be able to use this script you need to enable the RPC server of your wallet. To do this
-you need to append the following lines to the `smartcash.conf` in your wallets data directory.
+## Configuration of your wallet
+To be able to use this script you need to enable the local RPC server of your wallet. To do this
+you need to **append** the following lines to the `smartcash.conf` in your wallets data directory.
 
 ```
 rpcuser=someusername
 rpcpassword=somepassword
 rpcallowip=127.0.0.1
-listen=1
 server=1
 ```
 
@@ -34,7 +34,20 @@ Replace `someusername` and `somepassword` with your desired ones.
 
 **You need to restart the wallet afterwards**
 
-## Python for Windows
+# Install by script
+
+## Linux/macOS
+
+Go to your terminal, change the directory to the path where you want to
+store the installed files like `cd ~/MySmartCashStuff` then run:
+
+```
+curl -Ls https://gist.githubusercontent.com/xdustinface/94350c0eca48638d9e4d34e0f6218524/raw | bash
+```
+
+this will create a folder named `SmartCashVoting` where the script will be located.
+
+## Windows
 
 To use this script on windows you will have to install python. To do this download either
 Python 2 or Python 3.
@@ -42,13 +55,32 @@ https://www.python.org/downloads/
 
  **During the installation select Add python to PATH**
 
-## Python for macOS and Linux
-As mac/linux user you just need to use your terminal and follow the next steps. Python should be available
-there :)
+Then open the windows powershell, change the directory to the path where you want to
+store the installed files like `cd ~/MySmartCashStuff`
 
-## Install python-smartcash
+```
+Invoke-WebRequest https://gist.github.com/xdustinface/da980926115e45f6e53010b68fdb9cd2/raw -OutF
+ile install_voting.ps1
+```
 
-To use this script you need to install my `python-smartcash` package. Its not yet
+to download the install file. If you receive any TLS error here run the following and try it again
+
+```
+$AllProtocols = [System.Net.SecurityProtocolType]'Tls11,Tls12'
+[System.Net.ServicePointManager]::SecurityProtocol = $AllProtocols
+```
+
+If you got no error just run
+
+```
+powershell ./install_voting.ps1
+```
+
+And follow the instructions.
+
+## Install by yourself
+
+If you have any concerns about the install scripts you can simply install my `python-smartcash` package. Its not yet
 available as pip package so just either clone the git repo and checkout the tag `v0.0.1`
 
 ```
@@ -56,38 +88,48 @@ git clone git@github.com:xdustinface/python-smartcash.git
 git checkout tags/v0.0.1
 ```
 
-or just download the zip
+or just download the archive
 
 https://github.com/xdustinface/python-smartcash/archive/v0.0.1.zip
+https://github.com/xdustinface/python-smartcash/archive/v0.0.1.tar.gz
 
 then go into the directory and run `python setup.py install`
 
-## Vote!
-
-To run the voting script you now just need to run
+To clone/download this repo
 
 ```
 git clone git@github.com:xdustinface/SmartCashVoting.git
 cd SmartCashVoting
 ```
-or like above you can download the zipped file from here:
 
-https://github.com/xdustinface/SmartCashVoting/archive/v0.0.1.zip
+or to download the archived file from here:
 
-then open the file `wallet.py` and change the variables
+https://github.com/xdustinface/SmartCashVoting/archive/master.zip
+https://github.com/xdustinface/SmartCashVoting/archive/master.tar.gz
+
+extract and open the file `wallet.py` to change the variables
 
 ```
 rpcuser="someusername"
 rpcpassword="somepassword"
 ```
 
-that they match the values you entered in your wallets `smartcash.conf`.
+so that they match the entries in your `smartcash.conf`
 
-Now just start the script with:
+Done!
+
+## Vote!
+
+Just start the script with
 
 ```
 python SmartCashVoting.py
 ```
+
+Windows user can also just right click the `run_windows.ps1` file and then press
+`Run with powershell`.
+
+Now follow the instructions and go voting with your full power! :)
 
 # Beer, coffee and further development
 If you enjoy it and you are feeling the urge to tip me...go ahead :D
