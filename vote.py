@@ -210,7 +210,10 @@ class SmartCashVoting(object):
 
         for proposal in self.proposals:
             idx += 1
-            print("[{}] {}".format(idx, proposal['title']))
+            print("\n[{}] {}".format(idx, proposal['title']))
+            print("       Requested - {} USD | {} SMART".format(proposal['amountUSD'],proposal['amountSmart']))
+            print("       Votes - Yes {:.2f}% | No {:.2f}% | Abstain {:.2f}%".format(proposal['percentYes'],proposal['percentNo'], proposal['percentAbstain']))
+            print("       Ends at - {}".format(proposal['votingDeadline']))
 
         idx = input("\nSelect any number from 1 to {}: ".format(len(self.proposals)))
 
@@ -272,7 +275,7 @@ class SmartCashVoting(object):
 
         clear()
 
-        print("** Start voting for - {}**\n".format(self.activeProposal['title']))
+        print("** Start voting {} for - {}**\n".format(self.voteType, self.activeProposal['title']))
 
         self.success = 0
         self.failed = 0
@@ -398,12 +401,11 @@ class SmartCashVoting(object):
                         self.state = STATE_DONE
 
                     else:
-                        # Ask again for the proposal to vote
-                        self.state = STATE_ASK_PROPOSAL
+                        # Jump back and load the proposals again
+                        self.state = STATE_LOAD_PROPOSALS
 
                 else:
                     error("Something went wrong during the voting process.")
                     self.state = STATE_CANCELED
-
 
         return self.state == STATE_DONE
