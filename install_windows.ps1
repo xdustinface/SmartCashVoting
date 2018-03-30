@@ -43,6 +43,8 @@ Function Test-CommandExists
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
+$libversion = "0.0.1"
+
 if(Test-CommandExists python)
 {
     $AllProtocols = [System.Net.SecurityProtocolType]'Tls11,Tls12'
@@ -50,30 +52,37 @@ if(Test-CommandExists python)
 
     echo "`r`nPython found! Download python-smartcash lib now...`r`n"
 
-    Invoke-WebRequest https://github.com/xdustinface/python-smartcash/archive/v0.0.1.zip -OutFile $scriptPath\python-smartcash.zip
+    Invoke-WebRequest https://github.com/xdustinface/python-smartcash/archive/v${libversion}.zip -OutFile $scriptPath\python-smartcash.zip
 
-    if (Test-Path $scriptPath\python-smartcash-0.0.1/ -PathType Container) {
-		Remove-Item -path $scriptPath\python-smartcash-0.0.1/ -recurse -force
-	}
+    if( $? ){
 
-    Expand-Archive -Path $scriptPath\python-smartcash.zip -DestinationPath $scriptPath
-    Remove-Item $scriptPath\python-smartcash.zip
+        if (Test-Path $scriptPath\python-smartcash-0.0.1/ -PathType Container) {
+		    Remove-Item -path $scriptPath\python-smartcash-0.0.1/ -recurse -force
+	    }
 
-    $rpcuser = Read-Host 'Enter the rpc user from your smartcash.conf: '
-    $rpcpassword = Read-Host 'Enter the rpc password from your smartcash.conf: '
+        Expand-Archive -Path $scriptPath\python-smartcash.zip -DestinationPath $scriptPath
+        Remove-Item $scriptPath\python-smartcash.zip
 
-    (Get-Content $scriptPath\wallet.py) `
-        -replace 'rpcuser=.*', $('rpcuser="' + $rpcuser + '"') `
-        -replace 'rpcpassword=.*', $('rpcpassword="' + $rpcpassword + '"') |
-      Out-File -Encoding "UTF8" $scriptPath\wallet.py
+        $rpcuser = Read-Host 'Enter the rpc user from your smartcash.conf: '
+        $rpcpassword = Read-Host 'Enter the rpc password from your smartcash.conf: '
 
-    cd $scriptPath\python-smartcash-0.0.1
+        (Get-Content $scriptPath\wallet.py) `
+            -replace 'rpcuser=.*', $('rpcuser="' + $rpcuser + '"') `
+            -replace 'rpcpassword=.*', $('rpcpassword="' + $rpcpassword + '"') |
+            Out-File -Encoding "UTF8" $scriptPath\wallet.py
 
-    echo "`r`nInstalling python-smartcash...`r`n"
+        cd $scriptPath\python-smartcash-0.0.1
 
-    python setup.py install
+        echo "`r`nInstalling python-smartcash...`r`n"
 
-    Read-Host -Prompt "`r`nDone! Now you can start the run_windows.ps1 to run the voting script."
+        python setup.py install
+
+        Read-Host -Prompt "`r`nDone! Now you can start the run_windows.ps1 to run the voting script."
+
+    }else{
+        echo "[ERROR] Could not download python-smartcash v${libversion}."
+    }
+
 }
 else
 {

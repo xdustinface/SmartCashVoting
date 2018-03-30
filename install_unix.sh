@@ -25,34 +25,47 @@
 
 echo 'Installing SmartCashVoting...'
 
-if hash python 2>/dev/null ; then
-    echo 'Python found! Download python-smartcash lib now...'
+libversion="0.0.1"
 
-    url='https://github.com/xdustinface/python-smartcash/archive/v0.0.1.tar.gz'
+if hash python 2>/dev/null ; then
+    echo "Python found! Download python-smartcash v${libversion} now..."
+
+    url="https://github.com/xdustinface/python-smartcash/archive/v${libversion}.tar.gz"
     archive='python-smartcash.tar.gz'
 
     wget $url -O $archive 2>/dev/null || curl -sL $url -o $archive
 
-    tar -xf $archive
-    rm $archive
+    if [ $? -eq 0 ]; then
 
-    echo "Enter the rpc user from your smartcash.conf.."
+        tar -xf $archive
+        rm $archive
 
-    read -p "rpcuser: " rpcuser </dev/tty
+        echo "Enter the rpc user from your smartcash.conf.."
 
-    echo "Enter the rpc password from your smartcash.conf.."
-    read -p "rpcpassword: " rpcpassword </dev/tty
+        read -p "rpcuser: " rpcuser </dev/tty
 
-    sed -i "s/rpcuser=.*/rpcuser=\"${rpcuser}\"/g" wallet.py
-    sed -i "s/rpcpassword=.*/rpcpassword=\"${rpcpassword}\"/g" wallet.py
+        echo "Enter the rpc password from your smartcash.conf.."
+        read -p "rpcpassword: " rpcpassword </dev/tty
 
-    cd python-smartcash-0.0.1/
+        sed -i "s/rpcuser=.*/rpcuser=\"${rpcuser}\"/g" wallet.py
+        sed -i "s/rpcpassword=.*/rpcpassword=\"${rpcpassword}\"/g" wallet.py
 
-    echo 'Installing python-smartcash...'
+        cd "python-smartcash-${libversion}"
 
-    python setup.py install --user
+        echo 'Installing python-smartcash...'
 
-    echo 'Done! Now you can start the python SmartCashVoting.py to run the voting script.'
+        python setup.py install --user
+        if [ $? -eq 0 ]; then
+            echo 'Done! Now you can start the python SmartCashVoting.py to run the voting script.'
+        else
+            echo "[ERROR] Could not install python-smartcash v${libversion}. Check if python-setuptools are available!"
+        fi
+
+    else
+        echo "[ERROR] Could not download python-smartcash v${libversion}."
+    fi
+
+
 else
     echo 'Canceled. You need to install python first!'
 fi
