@@ -50,7 +50,7 @@ if hash python 2>/dev/null ; then
 
     echo 'Installing python-smartcash...'
 
-    python setup.py install
+    python setup.py install --user
 
     echo 'Done! Now you can start the python SmartCashVoting.py to run the voting script.'
 else

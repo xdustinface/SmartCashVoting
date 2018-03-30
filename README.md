@@ -38,8 +38,13 @@ Replace `someusername` and `somepassword` with your desired ones.
 
 ## Linux/macOS
 
-Go to your terminal, change the directory to the path where you want to
-store the installed files like `cd ~/MySmartCashStuff` then run:
+First make sure `python` and `python-setuptools` are installed
+
+```
+sudo apt install python python-setuptools
+```
+
+then change the directory to the path where you want to store the installed files like `cd ~/MySmartCashStuff` and run:
 
 ```
 curl -Ls https://gist.githubusercontent.com/xdustinface/94350c0eca48638d9e4d34e0f6218524/raw | bash
