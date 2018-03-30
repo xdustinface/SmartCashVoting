@@ -102,6 +102,8 @@ class SmartCashVoting(object):
 
         if addressGroupings.error:
             error("Could not fetch addresses: {}".format(str(addressGroupings.error)))
+            print("Please verify that your wallet is running and the rpc server is enabled.")
+            print("Look here: https://github.com/xdustinface/SmartCashVoting#configuration-of-your-wallet")
             return False
 
         for addressGroup in addressGroupings.data:
