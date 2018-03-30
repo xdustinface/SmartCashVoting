@@ -65,7 +65,7 @@ if(Test-CommandExists python)
     (Get-Content $scriptPath\wallet.py) `
         -replace 'rpcuser=.*', $('rpcuser="' + $rpcuser + '"') `
         -replace 'rpcpassword=.*', $('rpcpassword="' + $rpcpassword + '"') |
-      Out-File $scriptPath\wallet.py
+      Out-File -Encoding "UTF8" $scriptPath\wallet.py
 
     cd $scriptPath\python-smartcash-0.0.1
 
