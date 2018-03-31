@@ -80,8 +80,7 @@ Then open the windows powershell, change the directory to the path where you wan
 store the installed files like `cd ~/MySmartCashStuff`
 
 ```
-Invoke-WebRequest https://gist.github.com/xdustinface/da980926115e45f6e53010b68fdb9cd2/raw -OutF
-ile install_voting.ps1
+Invoke-WebRequest https://gist.github.com/xdustinface/da980926115e45f6e53010b68fdb9cd2/raw -OutFile install_voting.ps1
 ```
 
 to download the install file. If you receive any TLS error here run the following and try it again
