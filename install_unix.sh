@@ -47,8 +47,8 @@ if hash python 2>/dev/null ; then
         echo "Enter the rpc password from your smartcash.conf.."
         read -p "rpcpassword: " rpcpassword </dev/tty
 
-        sed -i "s/rpcuser=.*/rpcuser=\"${rpcuser}\"/g" wallet.py
-        sed -i "s/rpcpassword=.*/rpcpassword=\"${rpcpassword}\"/g" wallet.py
+        sed -i.bak "s/rpcuser=.*/rpcuser=\"${rpcuser}\"/g" wallet.py
+        sed -i.bak "s/rpcpassword=.*/rpcpassword=\"${rpcpassword}\"/g" wallet.py
 
         cd "python-smartcash-${libversion}"
 
@@ -57,6 +57,7 @@ if hash python 2>/dev/null ; then
         python setup.py install --user
         if [ $? -eq 0 ]; then
             echo 'Done! Now you can start the python SmartCashVoting.py to run the voting script.'
+            exit 0
         else
             echo "[ERROR] Could not install python-smartcash v${libversion}. Check if python-setuptools are available!"
         fi
@@ -65,7 +66,8 @@ if hash python 2>/dev/null ; then
         echo "[ERROR] Could not download python-smartcash v${libversion}."
     fi
 
-
 else
-    echo 'Canceled. You need to install python first!'
+    echo '[ERROR] You need to install python first!'
 fi
+
+exit 1
