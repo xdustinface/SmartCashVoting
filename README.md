@@ -36,9 +36,9 @@ Replace `someusername` and `somepassword` with your desired ones.
 
 # Install by script
 
-## Linux/macOS
+## Linux
 
-First make sure `python` and `python-setuptools` are installed
+First make sure `python` and `python-setuptools` are installed and up to date
 
 ```
 sudo apt install python python-setuptools
@@ -47,10 +47,26 @@ sudo apt install python python-setuptools
 then change the directory to the path where you want to store the installed files like `cd ~/MySmartCashStuff` and run:
 
 ```
-curl -Ls https://gist.githubusercontent.com/xdustinface/94350c0eca48638d9e4d34e0f6218524/raw | bash
+curl -LSs https://gist.githubusercontent.com/xdustinface/94350c0eca48638d9e4d34e0f6218524/raw | bash
 ```
 
-this will create a folder named `SmartCashVoting` where the script will be located.
+this will create a folder named `SmartCashVoting-x.x` where the script will be located.
+
+# macOS
+
+Im currently don't have the chance to test the install script on a clean mac. My one is already infested with all those stuff. I think the best way to go is just using the python installation provided per default by apple. Just make sure your python setuptools are up to date. In your terminal run
+
+```
+python -m pip install --upgrade pip setuptools
+```
+
+then change the directory to the path where you want to store the installed files like `cd ~/MySmartCashStuff` and run:
+
+```
+curl -LSs https://gist.githubusercontent.com/xdustinface/94350c0eca48638d9e4d34e0f6218524/raw | bash
+```
+
+this will create a folder named `SmartCashVoting-x.x` where the script will be located.
 
 ## Windows
 

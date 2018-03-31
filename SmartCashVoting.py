@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #####
 # Part of `SmartCashVoting`
 #
@@ -24,14 +23,12 @@
 #####
 
 
-import os, logging, traceback
+import os, traceback
 from smartcash.rpc import RPCConfig
 from vote import SmartCashVoting
 from version import __version__
 import wallet
 import argparse
-
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.ERROR)
 
 if __name__ == '__main__':
 
