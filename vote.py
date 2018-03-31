@@ -283,29 +283,18 @@ class SmartCashVoting(object):
         proposalId = self.activeProposal['proposalId']
         proposalUrl = self.activeProposal['url']
 
-        for address, power in self.addresses.items():
+        # If the wallet was unlocked before entering the
+        # script leave it...
+        if not self.unlockedBefore:
+            self.rpc.unlockWallet(self.password)
 
-            # If the wallet was unlocked before entering the
-            # script leave it...
-            if not self.unlockedBefore:
-                self.rpc.unlockWallet(self.password)
+        for address, power in self.addresses.items():
 
             signed = self.rpc.signMessage(address, proposalUrl)
 
             if signed.error:
                 error("Could not sign message: {}".format(signed.error))
                 return False
-
-            verified = self.rpc.verifyMessage(address, proposalUrl, signed.data)
-
-            if verified.error:
-                error("Could not verify message: {}".format(verified.error))
-                return False
-
-            # If the wallet was unlocked before entering the
-            # script leave it...
-            if not self.unlockedBefore:
-                self.rpc.lockWallet()
 
             postData = {
              'proposalId': proposalId,
@@ -327,6 +316,11 @@ class SmartCashVoting(object):
                 message = "Could not vote with {} - {}:{}".format(address,response.status_code,response.reason)
 
             print("[{}] - {}".format(result, message))
+
+        # If the wallet was unlocked before entering the
+        # script leave it...
+        if not self.unlockedBefore:
+            self.rpc.lockWallet()
 
         if self.success:
             print("\nVoted with {} SMART!".format(self.success))
