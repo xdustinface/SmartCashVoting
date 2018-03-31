@@ -7,6 +7,8 @@ your wallet to be unlocked with an local RPC server enabled which means any mali
 
 **Use it with care and sanity! I cant take over any responsibilities for your funds.**
 
+More details and also usage screenshots here: https://steemit.com/smartcash/@dustinface/smarthive-voting-automation-script
+
 ## What?
 This is attempt to increase the overall voting power for the SmartCash voting portal.
 I assume people who have split their SMART's into many addresses (Nodes, SmartRewards or whatever reasons)
