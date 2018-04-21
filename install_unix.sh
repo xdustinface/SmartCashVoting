@@ -25,7 +25,7 @@
 
 echo 'Installing SmartCashVoting...'
 
-libversion="0.0.1"
+libversion="0.0.2"
 
 if hash python 2>/dev/null ; then
     echo "Python found! Download python-smartcash v${libversion} now..."

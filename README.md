@@ -103,18 +103,18 @@ And follow the instructions.
 ## Install by yourself
 
 If you have any concerns about the install scripts you can simply install my `python-smartcash` package. Its not yet
-available as pip package so just either clone the git repo and checkout the tag `v0.0.1`
+available as pip package so just either clone the git repo and checkout the tag `v0.0.2`
 
 ```
 git clone git@github.com:xdustinface/python-smartcash.git
-git checkout tags/v0.0.1
+git checkout tags/v0.0.2
 ```
 
 or just download the archive
 
-https://github.com/xdustinface/python-smartcash/archive/v0.0.1.zip
+https://github.com/xdustinface/python-smartcash/archive/v0.0.2.zip
 
-https://github.com/xdustinface/python-smartcash/archive/v0.0.1.tar.gz
+https://github.com/xdustinface/python-smartcash/archive/v0.0.2.tar.gz
 
 then go into the directory and run `python setup.py install`
 

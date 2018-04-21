@@ -43,7 +43,7 @@ Function Test-CommandExists
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
-$libversion = "0.0.1"
+$libversion = "0.0.2"
 
 if(Test-CommandExists python)
 {
@@ -56,8 +56,8 @@ if(Test-CommandExists python)
 
     if( $? ){
 
-        if (Test-Path $scriptPath\python-smartcash-0.0.1/ -PathType Container) {
-		    Remove-Item -path $scriptPath\python-smartcash-0.0.1/ -recurse -force
+        if (Test-Path $scriptPath\python-smartcash-0.0.2/ -PathType Container) {
+		    Remove-Item -path $scriptPath\python-smartcash-0.0.2/ -recurse -force
 	    }
 
         Expand-Archive -Path $scriptPath\python-smartcash.zip -DestinationPath $scriptPath
@@ -71,7 +71,7 @@ if(Test-CommandExists python)
             -replace 'rpcpassword=.*', $('rpcpassword="' + $rpcpassword + '"') |
             Out-File -Encoding "UTF8" $scriptPath\wallet.py
 
-        cd $scriptPath\python-smartcash-0.0.1
+        cd $scriptPath\python-smartcash-0.0.2
 
         echo "`r`nInstalling python-smartcash...`r`n"
 
