@@ -210,7 +210,7 @@ class SmartCashVoting(object):
 
         for proposal in self.proposals:
             idx += 1
-            print("\n[{}] {}".format(idx, proposal['title']))
+            print("\n[{}] {}".format(idx, proposal['title'].encode('utf-8')))
             print("       Requested - {} USD | {} SMART".format(proposal['amountUSD'],proposal['amountSmart']))
             print("       Votes - Yes {:.2f}% | No {:.2f}% | Abstain {:.2f}%".format(proposal['percentYes'],proposal['percentNo'], proposal['percentAbstain']))
             print("       Ends at - {}".format(proposal['votingDeadline']))
@@ -246,7 +246,7 @@ class SmartCashVoting(object):
 
         ret = {'voteType' : None, 'result' : False }
 
-        print("Selected proposal: {}\n".format(self.activeProposal['title']))
+        print("Selected proposal: {}\n".format(self.activeProposal['title'].encode('utf-8')))
         voteType = input(("How do you want to vote?\n\n"
                           "[y] - YES\n"
                           "[a] - ABSTAIN\n"
@@ -275,7 +275,7 @@ class SmartCashVoting(object):
 
         clear()
 
-        print("** Start voting {} for - {}**\n".format(self.voteType, self.activeProposal['title']))
+        print("** Start voting {} for - {}**\n".format(self.voteType, self.activeProposal['title'].encode('utf-8')))
 
         self.success = 0
         self.failed = 0
